@@ -1,0 +1,188 @@
+{
+  "chain_name": "mantra-1",
+  "status": "live",
+  "network_type": "mainnet",
+  "pretty_name": "mantra-1",
+  "chain_id": "mantra-1",
+  "bech32_prefix": "mantra",
+  "daemon_name": "mantrachaind",
+  "node_home": "$HOME/.mantrachain",
+  "codebase": {
+    "genesis": {
+      "genesis_url": "https://raw.githubusercontent.com/MANTRA-Chain/net/main/mantra-1/genesis.json"
+    },
+    "git_repo": "github.com/MANTRA-Chain/mantrachain",
+    "recommended_version": "v1.0.3",
+    "compatible_versions": ["v1.0.0", "v1.0.2", "v1.0.3"],
+    "binaries": {
+      "darwin/amd64": "https://github.com/MANTRA-Chain/mantrachain/releases/download/v1.0.3/mantrachaind-1.0.3-darwin-amd64.tar.gz?checksum=sha256:dd891783b9514331320826a86db7da7d36f1471e411c2b8b055900512053c2f9",
+      "darwin/arm64": "https://github.com/MANTRA-Chain/mantrachain/releases/download/v1.0.3/mantrachaind-1.0.3-darwin-arm64.tar.gz?checksum=sha256:54fa85b5d4f05316d6c4ff753e5f98533403ad73010cb792851498e14bde5316",
+      "linux/amd64": "https://github.com/MANTRA-Chain/mantrachain/releases/download/v1.0.3/mantrachaind-1.0.3-linux-amd64.tar.gz?checksum=sha256:735dd296cf9431c775b90c50d9ddf8ff8d8ea319defac3f9b574ce419d010886",
+      "linux/arm64": "https://github.com/MANTRA-Chain/mantrachain/releases/download/v1.0.3/mantrachaind-1.0.3-linux-arm64.tar.gz?checksum=sha256:9afc720e6cc42cef6a4db4235542584c2902e542fbb5803bf880ae8b5fd88784"
+    }
+  },
+  "fees": {
+    "fee_tokens": [
+      {
+        "denom": "uom",
+        "base_gas_price": 0.01
+      }
+    ]
+  },
+  "peers": {
+    "seeds": [
+      {
+      "id": "32276da966637722914411e16ca91bd37dcd1c28",
+      "address": "seed0.mantrachain.io:26656"
+      },
+      {
+      "id": "9f5235b418c87af4302619705d0bf4748249ca6b",
+      "address": "seed1.mantrachain.io:26656"
+      },
+      {
+      "id": "b0acfd505bb4bc0c39d095663d310c253de18210",
+      "address": "seed2.mantrachain.io:26656"
+      },
+      {
+      "id": "f153213f0fe5d3cbe6e1f75d7ac0b4a27e70d31b",
+      "address": "seed-mantra.r93axnodes.cloud:13156"
+      },
+      {
+      "id": "ebc272824924ea1a27ea3183dd0b9ba713494f83",
+      "address": "mantrachain-mainnet-seed.autostake.com:27536"
+      },
+      {
+      "id": "8542cd7e6bf9d260fef543bc49e59be5a3fa9074",
+      "address": "seed.publicnode.com:26656"
+      },
+      {
+      "id": "16ab08754dd0dc8b4d9202db16cb354ff618e3d9",
+      "address": "mantra-mainnet-seed.itrocket.net:22656"
+      }
+    ],
+    "persistent_peers": [
+      {
+        "id": "ebc272824924ea1a27ea3183dd0b9ba713494f83",
+        "address": "mantrachain-mainnet-peer.autostake.com:27536"
+      },
+      {
+        "id": "5cb41a850a2d41a28ff908e0e984a2a8deb7498a",
+        "address": "mantra-mainnet-peer.itrocket.net:22656"
+      },
+      {
+        "id": "0e7fddfd9a398dbda4f7773a00ea377304a03527",
+        "address": "mantra-m.peer.stavr.tech:36056"
+      },
+      {
+        "id": "85d8dc0af47369513bd8080404f4633818d620bb",
+        "address": "34.92.110.13:26656"
+      },
+      {
+        "id": "ccd1627ed7949778c922206c3df0e7dcfbea34ea",
+        "address": "34.18.73.115:26656"
+      },
+      {
+        "id": "547d41b8aa7836a2bedc35fdfb6d61e277b8e63c",
+        "address": "34.130.46.96:26656"
+      }
+    ]
+  },
+  "apis": {
+    "rpc": [
+      {
+        "address": "https://rpc-mantra.r93axnodes.cloud:443"
+      },
+      {
+        "address": "https://mantra-mainnet-rpc.itrocket.net:443"
+      },
+      {
+        "address": "https://mantrachain-mainnet-rpc.autostake.com:443"
+      },
+      {
+        "address": "https://rpc.mantrachain.io:443"
+      },
+      {
+        "address": "https://mantra.rpc.m.stavr.tech:443"
+      },
+      {
+        "address": "https://mantra-rpc.publicnode.com:443"
+      }
+    ],
+    "rest": [
+      {
+        "address": "https://mantra-rest.publicnode.com",
+        "provider": "Allnodes"
+      },
+      {
+        "address": "https://mantrachain-mainnet-lcd.autostake.com:443",
+        "provider": "AutoStake"
+      },
+      {
+        "address": "https://mantra-mainnet-api.itrocket.net",
+        "provider": "ITRocket"
+      },
+      {
+        "address": "https://api.mantrachain.io",
+        "provider": "MANTRA"
+      },
+      {
+        "address": "https://mantra.api.m.stavr.tech",
+        "provider": "STAVR"
+      },
+      {
+        "address": "https://api-mantra.r93axnodes.cloud:443",
+        "provider": "r93AX"
+      }
+    ],
+    "grpc": [
+      {
+        "address": "mantra-grpc.publicnode.com:443",
+        "provider": "Allnodes"
+      },
+      {
+        "address": "mantrachain-mainnet-rpc.autostake.com:443",
+        "provider": "AutoStake"
+      },
+      {
+        "address": "mantra-mainnet-grpc.itrocket.net:443",
+        "provider": "ITRocket"
+      },
+      {
+        "address": "grpc.mantrachain.io:443",
+        "provider": "MANTRA"
+      },
+      {
+        "address": "mantra.grpc.m.stavr.tech:3601",
+        "provider": "STAVR"
+      },
+      {
+        "address": "grpc-mantra.r93axnodes.cloud:443",
+        "provider": "r93AX"
+      }
+    ]
+  },
+  "snapshots": {
+    "pruned_node": {
+      "pebbledb": {
+        "url": [
+          "https://snapshots.mantrachain.io/mantra-1_pebbledb_fullnode_latest.tar.lz4"
+        ]
+      },
+      "goleveldb": {
+        "url": [
+          "https://snapshots.mantrachain.io/mantra-1_goleveldb_fullnode_latest.tar.lz4"
+        ]
+      }
+    },
+    "archive": {
+      "goleveldb": {
+        "url": [
+          "https://snapshots.mantrachain.io/mantra-1_goleveldb_archive_latest.tar.lz4"
+        ]
+      },
+      "pebbledb": {
+        "url": []
+      }
+    }
+  }
+}

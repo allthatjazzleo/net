@@ -1,0 +1,99 @@
+{
+  "chain_name": "mantra-dukong-1",
+  "status": "live",
+  "network_type": "testnet",
+  "pretty_name": "mantra-dukong-1",
+  "chain_id": "mantra-dukong-1",
+  "bech32_prefix": "mantra",
+  "daemon_name": "mantrachaind",
+  "node_home": "$HOME/.mantrachain",
+  "codebase": {
+    "genesis": {
+      "genesis_url": "https://raw.githubusercontent.com/MANTRA-Chain/net/main/mantra-dukong-1/genesis.json"
+    },
+    "git_repo": "github.com/MANTRA-Chain/mantrachain",
+    "recommended_version": "v1.0.1",
+    "compatible_versions": ["v1.0.1"],
+    "binaries": {
+      "darwin/amd64": "https://github.com/MANTRA-Chain/mantrachain/releases/download/v1.0.1/mantrachaind-1.0.1-darwin-amd64.tar.gz?checksum=sha256:0958ec5620deec1f541bdae8dde9ac46f21883d74804700642f3f983e9e2bee8",
+      "darwin/arm64": "https://github.com/MANTRA-Chain/mantrachain/releases/download/v1.0.1/mantrachaind-1.0.1-darwin-arm64.tar.gz?checksum=sha256:062fae76df41175fd134779e12e49f36121809f480d90b3caeb015a083f75b87",
+      "linux/amd64": "https://github.com/MANTRA-Chain/mantrachain/releases/download/v1.0.1/mantrachaind-1.0.1-linux-amd64.tar.gz?checksum=sha256:5ab8c7238e4319f2d3cd9ff053c6321f1ec67aa93a1eb94d0a300cdb53a803eb",
+      "linux/arm64": "https://github.com/MANTRA-Chain/mantrachain/releases/download/v1.0.1/mantrachaind-1.0.1-linux-arm64.tar.gz?checksum=sha256:5ca94db39a02afd7ba2b224a93c83f3602ef1b5d1c42a4e569de7e380328da83"
+    }
+  },
+  "fees": {
+    "fee_tokens": [
+      {
+        "denom": "uom",
+        "base_gas_price": 0.01
+      }
+    ]
+  },
+  "peers": {
+    "seeds": [
+      {
+        "id": "7e061edecef73a700b699c785f61a44ca981ff7f",
+        "address": "seed0.dukong.mantrachain.io:26656"
+      },
+      {
+        "id": "8542cd7e6bf9d260fef543bc49e59be5a3fa9074",
+        "address": "seed.publicnode.com:26656"
+      }
+    ],
+    "persistent_peers": []
+  },
+  "apis": {
+    "rpc": [
+      {
+        "address": "https://rpc.dukong.mantrachain.io:443"
+      },
+      {
+        "address": "https://mantra-testnet-rpc.publicnode.com:443"
+      }
+    ],
+    "rest": [
+      {
+        "address": "https://mantra-testnet-rest.publicnode.com:443",
+        "provider": "Allnodes"
+      },
+      {
+        "address": "https://api.dukong.mantrachain.io:443",
+        "provider": "MANTRA"
+      }
+    ],
+    "grpc": [
+      {
+        "address": "mantra-testnet-grpc.publicnode.com:443",
+        "provider": "Allnodes"
+      },
+      {
+        "address": "grpc.dukong.mantrachain.io:443",
+        "provider": "MANTRA"
+      }
+    ]
+  },
+  "snapshots": {
+    "pruned_node": {
+      "pebbledb": {
+        "url": [
+          "https://snapshots.mantrachain.io/mantra-dukong-1_pebbledb_fullnode_latest.tar.lz4"
+        ]
+      },
+      "goleveldb": {
+        "url": [
+          "https://snapshots.mantrachain.io/mantra-dukong-1_goleveldb_fullnode_latest.tar.lz4"
+        ]
+      }
+    },
+    "archive": {
+      "goleveldb": {
+        "url": [
+          "https://snapshots.mantrachain.io/mantra-dukong-1_goleveldb_archive_latest.tar.lz4"
+        ]
+      },
+      "pebbledb": {
+        "url": []
+      }
+    }
+  }
+}

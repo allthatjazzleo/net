@@ -125,7 +125,7 @@ git checkout v2.0.0
 make install
 ``` -->
 
-4. Restart the Osmosis daemon and observe the upgrade.
+4. Restart the Mantrachain daemon and observe the upgrade.
 
 ---
 

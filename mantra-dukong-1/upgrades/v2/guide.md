@@ -1,19 +1,22 @@
-# v1 to v2 Testnet Upgrade Guide
+# Testnet Upgrade Guide: From Version v1 to v2
 
-|                 |                                                          |
-|-----------------|----------------------------------------------------------|
-| Chain-id        | `mantra-dukong-1`                                        |
-| Upgrade Version | `v2.0.0`                                                 |
-| Upgrade Height  | 2628000                                                  |
-| Countdown       | <https://www.mintscan.io/mantra-testnet/block/2628000>   |
+## Overview
 
-## Memory Requirements
+- **v2 Proposal**: [Proposal Page](https://www.mintscan.io/mantra-testnet/proposals/10)
+- **v2 Upgrade Block Height**: 2628000
+- **v2 Upgrade Countdown**: [Block Countdown](https://www.mintscan.io/mantra-testnet/block/2628000)
 
-This upgrade will **not** be resource intensive. With that being said, we still recommend having 32GB of memory. If having 32GB of physical memory is not possible, the next best thing is to set up swap.
+## Hardware Requirements
 
-Short version swap setup instructions:
+### Memory Specifications
 
-``` {.sh}
+Although this upgrade is not expected to be resource-intensive, a minimum of 32GB of RAM is advised. If you cannot meet this requirement, setting up a swap space is recommended.
+
+#### Configuring Swap Space
+
+_Execute these commands to set up a 32GB swap space_:
+
+```sh
 sudo swapoff -a
 sudo fallocate -l 32G /swapfile
 sudo chmod 600 /swapfile
@@ -21,95 +24,112 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 ```
 
-To persist swap after restart:
+_To ensure the swap space persists after reboot_:
 
-``` {.sh}
+```sh
 sudo cp /etc/fstab /etc/fstab.bak
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
 
-In depth swap setup instructions:
-<https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-20-04>
+For an in-depth guide on swap configuration, please refer to [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-20-04).
 
-## First Time Cosmovisor Setup
+---
 
-If you have never setup Cosmovisor before, follow the following instructions.
+## Cosmovisor Configuration
 
-If you have already setup Cosmovisor, skip to the next section.
+### Initial Setup (For First-Time Users)
 
-We highly recommend validators use cosmovisor to run their nodes. This
-will make low-downtime upgrades smoother, as validators don't have to
-manually upgrade binaries during the upgrade, and instead can
-pre-install new binaries, and cosmovisor will automatically update them
-based on on-chain SoftwareUpgrade proposals.
+If you have not previously configured Cosmovisor, follow this section; otherwise, proceed to the next section.
 
-You should review the docs for cosmovisor located here:
-<https://docs.cosmos.network/main/tooling/cosmovisor>
+Cosmovisor is strongly recommended for validators to minimize downtime during upgrades. It automates the binary replacement process according to on-chain `SoftwareUpgrade` proposals.
 
-If you choose to use cosmovisor, please continue with these
-instructions:
+Documentation for Cosmovisor can be found [here](https://docs.cosmos.network/main/tooling/cosmovisor).
 
-To install Cosmovisor:
+#### Installation Steps
 
-``` {.sh}
+_Run these commands to install and configure Cosmovisor_:
+
+
+```sh
 go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.6.0
-```
-
-After this, you must make the necessary folders for cosmosvisor in your
-daemon home directory (\~/.mantrachain).
-
-``` {.sh}
 mkdir -p ~/.mantrachain
 mkdir -p ~/.mantrachain/cosmovisor
 mkdir -p ~/.mantrachain/cosmovisor/genesis
 mkdir -p ~/.mantrachain/cosmovisor/genesis/bin
 mkdir -p ~/.mantrachain/cosmovisor/upgrades
-```
-
-Copy the current v1 mantrachaind binary into the
-cosmovisor/genesis folder and v1 folder.
-
-```{.sh}
 cp $GOPATH/bin/mantrachaind ~/.mantrachain/cosmovisor/genesis/bin
 ```
 
-Cosmovisor is now ready to be set up for v1.
+_Add these lines to your profile to set up environment variables_:
 
-Set these environment variables:
-
-```{.sh}
+```sh
 echo "# Setup Cosmovisor" >> ~/.profile
 echo "export DAEMON_NAME=mantrachaind" >> ~/.profile
 echo "export DAEMON_HOME=$HOME/.mantrachaind" >> ~/.profile
-echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=true" >> ~/.profile
+echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=false" >> ~/.profile
 echo "export DAEMON_LOG_BUFFER_SIZE=512" >> ~/.profile
 echo "export DAEMON_RESTART_AFTER_UPGRADE=true" >> ~/.profile
 echo "export UNSAFE_SKIP_BACKUP=true" >> ~/.profile
 source ~/.profile
 ```
 
-## Cosmovisor Upgrade
+### Upgrading to v2
 
-Now, at the upgrade height, Cosmovisor will automatically download binary and upgrade to the v2 binary
+_To prepare for the upgrade, execute these commands_:
 
-<!-- ## Manual Option
+```sh
+upgrade_version="2.0.0"
+upgrade_name="v2"
+mkdir -p ~/.mantrachain/cosmovisor/upgrades/$upgrade_name/bin
+if [[ $(uname -m) == 'arm64' ]] || [[ $(uname -m) == 'aarch64' ]]; then export ARCH="arm64"; else export ARCH="amd64"; fi
+if [[ $(uname) == 'Darwin' ]]; then export OS="darwin"; else export OS="linux"; fi
+wget https://github.com/MANTRA-Chain/mantrachain/releases/download/v$upgrade_version/mantrachaind-$upgrade_version-$OS-$ARCH.tar.gz
+tar -xvf mantrachaind-$upgrade_version-$OS-$ARCH.tar.gz -C ~/.mantrachain/cosmovisor/upgrades/$upgrade_name/bin
+rm mantrachaind-$upgrade_version-$OS-$ARCH.tar.gz
+```
+<!-- 
+```sh
+mkdir -p ~/.mantrachain/cosmovisor/upgrades/v2/bin
+cd $HOME/mantrachain
+git pull
+git checkout v2.0.0
+make build
+cp build/mantrachaind ~/.mantrachain/cosmovisor/upgrades/v2/bin
+``` -->
 
-1. Wait for Mantrachain to reach the upgrade height (2628000)
+At the designated block height, Cosmovisor will automatically upgrade to version v2.
 
-2. Look for a panic message, followed by endless peer logs. Stop the daemon
+---
 
-3. Run the following commands:
+## Manual Upgrade Procedure
 
-    ```{.sh}
-    cd $HOME/mantrachain
-    git pull
-    git checkout v2.0.0
-    make install
-    ```
+Follow these steps if you opt for a manual upgrade:
 
-4. Start the mantrachain daemon again, watch the upgrade happen, and then continue to hit blocks -->
+1. Monitor Mantrachain until it reaches the specified upgrade block height: 2628000.
+2. Observe for a panic message followed by continuous peer logs, then halt the daemon.
+3. Perform these steps:
 
-## Further Help
+```sh
+upgrade_version="2.0.0"
+upgrade_name="v2"
+if [[ $(uname -m) == 'arm64' ]] || [[ $(uname -m) == 'aarch64' ]]; then export ARCH="arm64"; else export ARCH="amd64"; fi
+if [[ $(uname) == 'Darwin' ]]; then export OS="darwin"; else export OS="linux"; fi
+wget https://github.com/MANTRA-Chain/mantrachain/releases/download/v$upgrade_version/mantrachaind-$upgrade_version-$OS-$ARCH.tar.gz
+tar -xvf mantrachaind-$upgrade_version-$OS-$ARCH.tar.gz -C $GOPATH/bin
+```
+
+<!-- ```sh
+cd $HOME/mantrachain
+git pull
+git checkout v2.0.0
+make install
+``` -->
+
+4. Restart the Osmosis daemon and observe the upgrade.
+
+---
+
+## Additional Resources
 
 If you need more help, please:
     - go to <https://docs.mantrachain.io>

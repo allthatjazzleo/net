@@ -65,7 +65,7 @@ _Add these lines to your profile to set up environment variables_:
 ```sh
 echo "# Setup Cosmovisor" >> ~/.profile
 echo "export DAEMON_NAME=mantrachaind" >> ~/.profile
-echo "export DAEMON_HOME=$HOME/.mantrachaind" >> ~/.profile
+echo "export DAEMON_HOME=$HOME/.mantrachain" >> ~/.profile
 echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=false" >> ~/.profile
 echo "export DAEMON_LOG_BUFFER_SIZE=512" >> ~/.profile
 echo "export DAEMON_RESTART_AFTER_UPGRADE=true" >> ~/.profile

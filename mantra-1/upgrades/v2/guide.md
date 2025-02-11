@@ -74,7 +74,7 @@ source ~/.profile
 ```
 ### Upgrading to v2
 
-#### Important Note
+#### 🚨 Important Note 🚨
 
 **For now, please download only the prebuilt binary. Do not build from source since the current tag is a placeholder for an unrevealed security patch. The source remains private until the mainnet upgrade succeeds.**
 

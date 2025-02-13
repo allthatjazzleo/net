@@ -77,6 +77,8 @@ source ~/.profile
 
 _To prepare for the upgrade, execute these commands_:
 
+#### Approach 1: Download Pre-built Release
+
 ```sh
 upgrade_version="2.0.0"
 upgrade_name="v2"
@@ -87,15 +89,18 @@ wget https://github.com/MANTRA-Chain/mantrachain/releases/download/v$upgrade_ver
 tar -xvf mantrachaind-$upgrade_version-$OS-$ARCH.tar.gz -C ~/.mantrachain/cosmovisor/upgrades/$upgrade_name/bin
 rm mantrachaind-$upgrade_version-$OS-$ARCH.tar.gz
 ```
-<!-- 
+
+#### Approach 2: Build from Source
+
 ```sh
-mkdir -p ~/.mantrachain/cosmovisor/upgrades/v2/bin
+upgrade_version="2.0.0"
+upgrade_name="v2"
+mkdir -p ~/.mantrachain/cosmovisor/upgrades/$upgrade_name/bin
 cd $HOME/mantrachain
-git pull
-git checkout v2.0.0
+git checkout v$upgrade_version
 make build
 cp build/mantrachaind ~/.mantrachain/cosmovisor/upgrades/v2/bin
-``` -->
+```
 
 At the designated block height, Cosmovisor will automatically upgrade to version v2.
 
@@ -109,6 +114,8 @@ Follow these steps if you opt for a manual upgrade:
 2. Observe for a panic message followed by continuous peer logs, then halt the daemon.
 3. Perform these steps:
 
+### Approach 1: Download Pre-built Release
+
 ```sh
 upgrade_version="2.0.0"
 upgrade_name="v2"
@@ -118,12 +125,15 @@ wget https://github.com/MANTRA-Chain/mantrachain/releases/download/v$upgrade_ver
 tar -xvf mantrachaind-$upgrade_version-$OS-$ARCH.tar.gz -C $GOPATH/bin
 ```
 
-<!-- ```sh
+### Approach 2: Build from Source
+
+```sh
+upgrade_version="2.0.0"
 cd $HOME/mantrachain
 git pull
-git checkout v2.0.0
+git checkout v$upgrade_version
 make install
-``` -->
+```
 
 4. Restart the Mantrachain daemon and observe the upgrade.
 
